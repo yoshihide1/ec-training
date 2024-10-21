@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+  <context id="id" targetRuntime="MyBatis3">
+    <!--  MapperにMapperアノテーションを付与   -->
+    <plugin type="org.mybatis.generator.plugins.MapperAnnotationPlugin" />
+    <!-- xmlファイルを生成時に上書きするためのプラグイン -->
+    <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin" />
+    <!-- コメント生成の抑制 -->
+    <commentGenerator>
+      <!-- すべてのコメントを抑制 -->
+      <property name="suppressAllComments" value="true" />
+    </commentGenerator>
+
+    <!-- 接続情報 -->
+    <jdbcConnection driverClass="org.postgresql.Driver"
+      connectionURL="jdbc:postgresql://localhost:5432/ec-training?useSSL=false" userId="developer"
+      password="1234" />
+
+    <!-- 型の変換 -->
+    <!-- https://mybatis.org/generator/configreference/javaTypeResolver.html -->
+    <javaTypeResolver>
+      <property name="useJSR310Types" value="true" />
+    </javaTypeResolver>
+
+    <!--  Entityの生成場所 -->
+    <javaModelGenerator targetPackage="ec.training.entity" targetProject="src/main/java">
+      <property name="exampleTargetPackage" value="ec.training.entity.example" />
+      <property name="exampleTargetProject" value="src/main/java/" />
+    </javaModelGenerator>
+
+    <!--  Mapper(xml)の生成場所 -->
+    <sqlMapGenerator targetPackage="ec.training.mapper" targetProject="src/main/resources" />
+
+    <!--  Mapper(java)の生成場所 -->
+    <javaClientGenerator targetPackage="ec.training.mapper" targetProject="src/main/java"
+      type="XMLMAPPER" />
+
+    <table schema="public" tableName="%">
+
+      <!-- 自動生成キーの設定 -->
+      <generatedKey column="id" sqlStatement="JDBC" identity="true" />
+
+      <!-- Entityを付与する -->
+      <domainObjectRenamingRule searchString="^(.*)$" replaceString="$0Entity" />
+
+      <!-- TIMESTAMPTZをOffsetDateTimeにマッピング -->
+      <columnOverride column="created_at" javaType="java.time.OffsetDateTime" />
+      <columnOverride column="updated_at" javaType="java.time.OffsetDateTime" />
+      <!-- 特定のカラムをEnum型にマッピング -->
+      <!-- <columnOverride column="priority" javaType="training.constant.Priority"
+        typeHandler="org.apache.ibatis.type.EnumTypeHandler" /> -->
+
+    </table>
+  </context>
+</generatorConfiguration>
