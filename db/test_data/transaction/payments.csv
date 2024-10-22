@@ -1,3 +1,11 @@
-id,order_id,payment_method,amount,payment_status,payment_date
-1,1,CREDIT_CARD,819.98,COMPLETED,2024-01-03 14:00:00
-2,2,PAY_PAL,39.98,PENDING,2024-01-04 15:00:00
+order_id,payment_method,amount,payment_status
+1,Credit Card,1500.00,Completed
+2,PayPal,250.00,Pending
+3,Debit Card,700.00,Completed
+4,Credit Card,1200.00,Failed
+5,PayPal,300.00,Refunded
+6,Credit Card,450.00,Completed
+7,Debit Card,600.00,Pending
+8,Credit Card,800.00,Completed
+9,PayPal,900.00,Failed
+10,Credit Card,100.00,Completed

@@ -14,7 +14,7 @@
 
     <!-- 接続情報 -->
     <jdbcConnection driverClass="org.postgresql.Driver"
-      connectionURL="jdbc:postgresql://localhost:5432/ec-training?useSSL=false" userId="developer"
+      connectionURL="jdbc:postgresql://localhost:5432/ec_training?useSSL=false" userId="developer"
       password="1234" />
 
     <!-- 型の変換 -->

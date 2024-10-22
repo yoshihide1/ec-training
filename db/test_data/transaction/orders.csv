@@ -1,3 +1,11 @@
-id,user_id,total_amount,status,shipping_address,shipping_city,shipping_state,shipping_postal_code,shipping_country,created_at,updated_at
-1,1,819.98,Shipped,123 Main St,New York,NY,10001,USA,2024-01-03 12:00:00,2024-01-03 12:00:00
-2,2,39.98,Pending,456 Oak St,San Francisco,CA,94102,USA,2024-01-04 13:00:00,2024-01-04 13:00:00
+user_id,total_amount,status,shipping_address,shipping_city,shipping_state,shipping_postal_code,shipping_country
+1,1500.00,Pending,Address1,City1,State1,12345,Country1
+2,250.00,Shipped,Address2,City2,State2,12346,Country2
+3,700.00,Delivered,Address3,City3,State3,12347,Country3
+4,1200.00,Pending,Address4,City4,State4,12348,Country4
+5,300.00,Cancelled,Address5,City5,State5,12349,Country5
+6,450.00,Shipped,Address6,City6,State6,12350,Country6
+7,600.00,Delivered,Address7,City7,State7,12351,Country7
+8,800.00,Pending,Address8,City8,State8,12352,Country8
+9,900.00,Cancelled,Address9,City9,State9,12353,Country9
+10,100.00,Shipped,Address10,City10,State10,12354,Country10

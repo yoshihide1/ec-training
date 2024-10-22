@@ -44,8 +44,7 @@ CREATE TABLE
         shipping_postal_code TEXT,
         shipping_country TEXT,
         created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
-        updated_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
-        FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
+        updated_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
     );
 
 CREATE TABLE
@@ -55,8 +54,8 @@ CREATE TABLE
         product_id BIGINT NOT NULL,
         quantity INT NOT NULL,
         unit_price NUMERIC(10, 2) NOT NULL,
-        FOREIGN KEY (order_id) REFERENCES orders (id) ON DELETE CASCADE,
-        FOREIGN KEY (product_id) REFERENCES products (id) ON DELETE CASCADE
+        created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
     );
 
 CREATE TABLE
@@ -65,8 +64,8 @@ CREATE TABLE
         product_id BIGINT NOT NULL,
         quantity INT NOT NULL,
         location TEXT,
-        updated_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
-        FOREIGN KEY (product_id) REFERENCES products (id) ON DELETE CASCADE
+        created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
     );
 
 CREATE TABLE
@@ -77,7 +76,8 @@ CREATE TABLE
         amount NUMERIC(10, 2) NOT NULL,
         payment_status TEXT NOT NULL,
         payment_date TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
-        FOREIGN KEY (order_id) REFERENCES orders (id) ON DELETE CASCADE
+        created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
     );
 
 CREATE TABLE
@@ -85,8 +85,7 @@ CREATE TABLE
         id BIGSERIAL PRIMARY KEY,
         user_id BIGINT NOT NULL,
         created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
-        updated_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
-        FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
+        updated_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
     );
 
 CREATE TABLE
@@ -96,7 +95,5 @@ CREATE TABLE
         product_id BIGINT NOT NULL,
         quantity INT NOT NULL,
         created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
-        updated_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
-        FOREIGN KEY (product_id) REFERENCES products (id) ON DELETE CASCADE,
-        FOREIGN KEY (cart_id) REFERENCES carts (id) ON DELETE CASCADE
+        updated_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
     );

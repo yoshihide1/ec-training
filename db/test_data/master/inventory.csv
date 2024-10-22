@@ -1,3 +1,11 @@
-id,product_id,quantity,location,updated_at
-1,1,500,Warehouse A,2024-01-01 10:00:00
-2,2,300,Warehouse B,2024-01-02 11:00:00
+product_id,quantity,location
+1,100,Warehouse A
+2,50,Warehouse B
+3,25,Warehouse C
+4,30,Warehouse A
+5,150,Warehouse D
+6,60,Warehouse A
+7,80,Warehouse C
+8,90,Warehouse B
+9,70,Warehouse D
+10,40,Warehouse A

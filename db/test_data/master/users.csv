@@ -1,3 +1,11 @@
-id,username,email,password_hash,first_name,last_name,phone_number,address,city,state,postal_code,country,created_at,updated_at
-1,jdoe,jdoe@example.com,hashedpassword123,John,Doe,1234567890,123 Main St,New York,NY,10001,USA,2024-01-01 10:00:00,2024-01-01 10:00:00
-2,asmith,asmith@example.com,hashedpassword456,Anna,Smith,0987654321,456 Oak St,San Francisco,CA,94102,USA,2024-01-02 11:00:00,2024-01-02 11:00:00
+username,email,password_hash,first_name,last_name,phone_number,address,city,state,postal_code,country
+user1,user1@example.com,hash1,First1,Last1,1234567890,Address1,City1,State1,12345,Country1
+user2,user2@example.com,hash2,First2,Last2,1234567891,Address2,City2,State2,12346,Country2
+user3,user3@example.com,hash3,First3,Last3,1234567892,Address3,City3,State3,12347,Country3
+user4,user4@example.com,hash4,First4,Last4,1234567893,Address4,City4,State4,12348,Country4
+user5,user5@example.com,hash5,First5,Last5,1234567894,Address5,City5,State5,12349,Country5
+user6,user6@example.com,hash6,First6,Last6,1234567895,Address6,City6,State6,12350,Country6
+user7,user7@example.com,hash7,First7,Last7,1234567896,Address7,City7,State7,12351,Country7
+user8,user8@example.com,hash8,First8,Last8,1234567897,Address8,City8,State8,12352,Country8
+user9,user9@example.com,hash9,First9,Last9,1234567898,Address9,City9,State9,12353,Country9
+user10,user10@example.com,hash10,First10,Last10,1234567899,Address10,City10,State10,12354,Country10
