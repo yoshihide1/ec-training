@@ -8,7 +8,7 @@
             "type": "java",
             "name": "TrainingApplication",
             "request": "launch",
-            "mainClass": "ec.backend.TrainingApplication",
+            "mainClass": "ec.training.TrainingApplication",
             "projectName": "backend"
         }
     ]
