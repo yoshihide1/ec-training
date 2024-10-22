@@ -1,17 +1,18 @@
 services:
   db:
     image: postgres:16 # PostgreSQL 16の公式イメージ
-    container_name: ec-training_postgres_16
+    container_name: ${CONTAINER_NAME}
     environment:
-      POSTGRES_USER: developer # デフォルトのユーザー名
-      POSTGRES_PASSWORD: 1234 # デフォルトのユーザーパスワード
-      POSTGRES_DB: ec-training # デフォルトで作成されるデータベース名
+      POSTGRES_USER: ${POSTGRES_USER} # デフォルトのユーザー名
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD} # デフォルトのユーザーパスワード
+      POSTGRES_DB: ${POSTGRES_DB} # デフォルトで作成されるデータベース名
+      POSTGRES_HOST_AUTH_METHOD: ${POSTGRES_HOST_AUTH_METHOD}
     ports:
-      - "5432:5432" # PostgreSQLのデフォルトポート
+      - "${PGPORT}:5432" # PostgreSQLのデフォルトポート
     volumes:
-      - pgdata:/var/lib/postgresql/data # データの永続化ボリューム
-      - ./db:/docker-entrypoint-initdb.d
-
+      - pgdata:/var/lib/postgresql/data
+      - ./db/test_data:/test_data
+      - ./db/init:/docker-entrypoint-initdb.d
 volumes:
   pgdata:
     driver: local # ローカルストレージにデータを保存

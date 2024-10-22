@@ -1,0 +1,3 @@
+id,user_id,total_amount,status,shipping_address,shipping_city,shipping_state,shipping_postal_code,shipping_country,created_at,updated_at
+1,1,819.98,Shipped,123 Main St,New York,NY,10001,USA,2024-01-03 12:00:00,2024-01-03 12:00:00
+2,2,39.98,Pending,456 Oak St,San Francisco,CA,94102,USA,2024-01-04 13:00:00,2024-01-04 13:00:00

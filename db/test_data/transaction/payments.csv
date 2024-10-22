@@ -1,0 +1,3 @@
+id,order_id,payment_method,amount,payment_status,payment_date
+1,1,CREDIT_CARD,819.98,COMPLETED,2024-01-03 14:00:00
+2,2,PAY_PAL,39.98,PENDING,2024-01-04 15:00:00
