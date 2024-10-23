@@ -1,11 +1,11 @@
-category,name,description,price,sku,stock_quantity
-Electronics,Smartphone,A high-end smartphone,699.99,SKU001,50
-Electronics,Laptop,A powerful laptop,1299.99,SKU002,30
-Home Appliances,Refrigerator,A spacious refrigerator,899.99,SKU003,20
-Home Appliances,Washing Machine,A high-efficiency washing machine,499.99,SKU004,25
-Electronics,Headphones,Noise-cancelling headphones,199.99,SKU005,100
-Electronics,Smartwatch,A smartwatch with health tracking,299.99,SKU006,75
-Furniture,Desk,A wooden office desk,249.99,SKU007,40
-Furniture,Chair,A comfortable office chair,149.99,SKU008,60
-Electronics,Tablet,A versatile tablet,399.99,SKU009,80
-Home Appliances,Microwave Oven,A compact microwave oven,129.99,SKU010,50
+id,category,name,description,price,sku,stock_quantity
+1,Electronics,Smartphone,A powerful smartphone with a great camera,699.99,SKU001,100
+2,Electronics,Laptop,A lightweight laptop for work and play,999.99,SKU002,50
+3,Home Appliances,Air Conditioner,Keep your home cool in summer,499.99,SKU003,30
+4,Furniture,Sofa,A comfortable sofa for your living room,299.99,SKU004,20
+5,Furniture,Dining Table,A stylish dining table for family meals,599.99,SKU005,15
+6,Fashion,T-shirt,A soft cotton T-shirt,19.99,SKU006,200
+7,Fashion,Jeans,Stylish denim jeans for everyday wear,39.99,SKU007,150
+8,Books,Fiction Book,A thrilling fiction book,14.99,SKU008,300
+9,Books,Non-Fiction Book,An insightful non-fiction book,24.99,SKU009,250
+10,Beauty,Cosmetics,High-quality cosmetic products,49.99,SKU010,100

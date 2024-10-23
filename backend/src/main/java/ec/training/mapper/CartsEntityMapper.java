@@ -1,10 +1,12 @@
 package ec.training.mapper;
 
-import ec.training.entity.CartsEntity;
-import ec.training.entity.example.CartsEntityExample;
 import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
+import ec.training.entity.CartsEntity;
+import ec.training.entity.example.CartsEntityExample;
 
 @Mapper
 public interface CartsEntityMapper {
@@ -29,4 +31,12 @@ public interface CartsEntityMapper {
     int updateByPrimaryKeySelective(CartsEntity record);
 
     int updateByPrimaryKey(CartsEntity record);
+
+    /**
+     * 
+     * @param userId
+     * @return ユーザーに紐づくカート
+     */
+    CartsEntity selectByUserId(Integer userId);
+
 }

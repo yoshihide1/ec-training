@@ -9,7 +9,8 @@
             "name": "TrainingApplication",
             "request": "launch",
             "mainClass": "ec.training.TrainingApplication",
-            "projectName": "backend"
+            "projectName": "backend",
+            "console": "internalConsole"
         }
     ]
 }
