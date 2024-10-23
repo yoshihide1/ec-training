@@ -1,6 +1,7 @@
 package ec.training.mapper;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -37,6 +38,6 @@ public interface CartsEntityMapper {
      * @param userId
      * @return ユーザーに紐づくカート
      */
-    CartsEntity selectByUserId(Integer userId);
+    Optional<CartsEntity> selectByUserId(Integer userId);
 
 }

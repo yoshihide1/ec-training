@@ -5,6 +5,9 @@ import org.springframework.stereotype.Service;
 
 import ec.training.controller.rest.product.ProductRepository;
 
+/**
+ * カートを操作するサービスクラス
+ */
 @Service
 public class CartService {
 
@@ -12,15 +15,14 @@ public class CartService {
     private ProductRepository productRepository;
 
     @Autowired
-    private CartItemRepository cartItemRepository;
+    private CartRepository cartRepository;
 
     public Cart add(final Long productId, final Integer userId) {// TODO LoginAuthなどに変更する
-        var product = productRepository.selectProduct(productId);
+        var product = productRepository.getProductById(productId);
         // TODO: 仮で固定、SpringSecurity実装後に修正する
-        var cartItems = cartItemRepository.selectCartItems(userId);
-        var cart = new Cart(cartItems);
-        cartItemRepository.saveItems(userId, cart);
+        var cart = cartRepository.getCartByUserId(userId);
+        var addedItemCart = cart.add(product);
+        cartRepository.saveCart(userId, addedItemCart);
         return cart.add(product);
-
     }
 }

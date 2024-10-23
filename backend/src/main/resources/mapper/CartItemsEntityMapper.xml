@@ -217,7 +217,6 @@
       updated_at = #{updatedAt,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
-
   <insert id="bulkInsert">
     insert into cart_items (cart_id, product_id, quantity)
     values 
@@ -227,15 +226,13 @@
       )
     </foreach>
   </insert>
-  <select id="selectCartItemsByUserId" parameterType="ec.training.entity.CartItemsEntity">
+  <select id="selectCartItemsByCartId" resultType="ec.training.entity.CartItemsEntity">
     select
-      ci.*
+    <include refid="Base_Column_List" />
     from
-      carts c
-    left join cart_items ci on
-      c.id = ci.cart_id
+      cart_items 
     where
-      c.user_id = #{userId};
+      cart_id = #{cartId};
   </select>
   <delete id="deleteCartItemsByCartId" parameterType="java.lang.Long">
     delete from cart_items where cart_id = #{cartId}

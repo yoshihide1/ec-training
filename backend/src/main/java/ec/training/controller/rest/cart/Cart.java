@@ -6,7 +6,7 @@ import java.util.Optional;
 
 import ec.training.controller.rest.product.Product;
 
-public record Cart(List<CartItem> items) {
+record Cart(List<CartItem> items) {
 
     /**
      * 商品をカートに追加する
@@ -15,12 +15,12 @@ public record Cart(List<CartItem> items) {
      * @return
      */
     // TODO cartIdを持つべきか...
-    public Cart add(final Product product) {
+    Cart add(final Product product) {
 
         var newItem = new CartItem(product);
         var updatedItems = new ArrayList<CartItem>(this.items);
 
-        var newItemInCart = existsItem(newItem);
+        var newItemInCart = findItemByProductId(newItem);
         if (newItemInCart.isPresent()) {
             updatedItems.remove(newItemInCart.get());// 不変にするためにあれば一旦削除する
             updatedItems.add(newItemInCart.get().increment());
@@ -31,11 +31,12 @@ public record Cart(List<CartItem> items) {
     }
 
     /**
+     * カート内の商品を検索
      * 
      * @param product
      * @return 同じ商品がカートにある場合はその商品を返す
      */
-    private Optional<CartItem> existsItem(final CartItem newItem) {
+    private Optional<CartItem> findItemByProductId(final CartItem newItem) {
         return this.items.stream().filter(item -> item.productId().equals(newItem.productId())).findFirst();
 
     }
