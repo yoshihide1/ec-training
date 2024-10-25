@@ -5,9 +5,9 @@ import ec.training.controller.rest.product.Product;
 /**
  * カート内の商品を表す
  */
-public record CartItem(Product product, int quantity) {
+record CartItem(Product product, int quantity) {
 
-    public CartItem {
+    CartItem {
         if (quantity < 0) {
             throw new IllegalArgumentException("数量は0以上の必要があります");
         }
@@ -21,7 +21,7 @@ public record CartItem(Product product, int quantity) {
      * 
      * @return 商品の個数を一つ増やす
      */
-    public CartItem increment() {
+    CartItem increment() {
         return new CartItem(this.product, this.quantity + 1);
     }
 
@@ -29,7 +29,7 @@ public record CartItem(Product product, int quantity) {
      * 
      * @return 商品の個数を一つ減らす
      */
-    public CartItem decrement() {
+    CartItem decrement() {
         return new CartItem(this.product, this.quantity - 1);
     }
 

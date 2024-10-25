@@ -10,42 +10,42 @@ import ec.training.entity.example.CartItemsEntityExample;
 
 @Mapper
 public interface CartItemsEntityMapper {
-        long countByExample(CartItemsEntityExample example);
+    long countByExample(CartItemsEntityExample example);
 
-        int deleteByExample(CartItemsEntityExample example);
+    int deleteByExample(CartItemsEntityExample example);
 
-        int deleteByPrimaryKey(Long id);
+    int deleteByPrimaryKey(Long id);
 
-        int insert(CartItemsEntity record);
+    int insert(CartItemsEntity record);
 
-        int insertSelective(CartItemsEntity record);
+    int insertSelective(CartItemsEntity record);
 
-        List<CartItemsEntity> selectByExample(CartItemsEntityExample example);
+    List<CartItemsEntity> selectByExample(CartItemsEntityExample example);
 
-        CartItemsEntity selectByPrimaryKey(Long id);
+    CartItemsEntity selectByPrimaryKey(Long id);
 
-        int updateByExampleSelective(@Param("record") CartItemsEntity record,
-                        @Param("example") CartItemsEntityExample example);
+    int updateByExampleSelective(@Param("record") CartItemsEntity record,
+            @Param("example") CartItemsEntityExample example);
 
-        int updateByExample(@Param("record") CartItemsEntity record, @Param("example") CartItemsEntityExample example);
+    int updateByExample(@Param("record") CartItemsEntity record, @Param("example") CartItemsEntityExample example);
 
-        int updateByPrimaryKeySelective(CartItemsEntity record);
+    int updateByPrimaryKeySelective(CartItemsEntity record);
 
-        int updateByPrimaryKey(CartItemsEntity record);
+    int updateByPrimaryKey(CartItemsEntity record);
 
-        List<CartItemsEntity> selectByCartId(@Param("cartId") Long cartId);
+    List<CartItemsEntity> selectByCartId(@Param("cartId") Long cartId);
 
-        /**
-         * 対象のユーザーのカートItemを削除する
-         * 
-         * @param userId
-         */
-        void deleteCartItemsByCartId(@Param("cartId") Long cartId);
+    /**
+     * 対象のユーザーのカートItemを削除する
+     * 
+     * @param userId
+     */
+    void deleteCartItemsByCartId(@Param("cartId") Long cartId);
 
-        /**
-         * 一括登録する
-         * 
-         * @param items
-         */
-        void bulkInsert(List<CartItemsEntity> items);
+    /**
+     * 一括登録する
+     * 
+     * @param items
+     */
+    void bulkInsert(List<CartItemsEntity> items);
 }

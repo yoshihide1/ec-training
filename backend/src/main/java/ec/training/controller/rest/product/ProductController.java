@@ -2,7 +2,6 @@ package ec.training.controller.rest.product;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,12 +12,15 @@ import ec.training.constant.ApiConstants;
 @RequestMapping(ApiConstants.BASE_PATH + "/product")
 public class ProductController {
 
-    @Autowired
-    private ProductDtoService dtoService;
+    private final ProductService productService;
+
+    ProductController(ProductService productService) {
+        this.productService = productService;
+    }
 
     @GetMapping("/list")
     public List<ProductDto> getList() {
-        return dtoService.getAllProducts();
+        return productService.getAllProducts();
     }
 
 }

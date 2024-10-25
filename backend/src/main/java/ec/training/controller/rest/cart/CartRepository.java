@@ -2,7 +2,6 @@ package ec.training.controller.rest.cart;
 
 import java.util.HashMap;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import ec.training.controller.rest.product.ProductRepository;
@@ -14,14 +13,18 @@ import ec.training.mapper.CartsEntityMapper;
 @Repository
 public class CartRepository {
 
-    @Autowired
-    private CartsEntityMapper cartsEntityMapper;
+    private final CartsEntityMapper cartsEntityMapper;
 
-    @Autowired
-    private CartItemsEntityMapper cartItemsEntityMapper;
+    private final CartItemsEntityMapper cartItemsEntityMapper;
 
-    @Autowired
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
+
+    CartRepository(CartsEntityMapper cartsEntityMapper, CartItemsEntityMapper cartItemsEntityMapper,
+            ProductRepository productRepository) {
+        this.cartsEntityMapper = cartsEntityMapper;
+        this.cartItemsEntityMapper = cartItemsEntityMapper;
+        this.productRepository = productRepository;
+    }
 
     /**
      * カートオブジェクトを取得する
@@ -29,13 +32,13 @@ public class CartRepository {
      * @param userId
      * @return カートオブジェクト
      */
-    public Cart getCartByUserId(final Integer userId) {
+    public Cart findCartByUserId(final Long userId) {
         var cartEntity = fetchCartById(userId);
         var cartItems = cartItemsEntityMapper.selectByCartId(cartEntity.getId());
 
         var itemMap = new HashMap<Long, CartItem>();
         for (var item : cartItems) {
-            var product = productRepository.selectProductById(item.getProductId());
+            var product = productRepository.findProductById(item.getProductId());
             itemMap.put(item.getProductId(), new CartItem(product, item.getQuantity()));
         }
         return new Cart(itemMap);
@@ -48,7 +51,7 @@ public class CartRepository {
      * @param userId
      * @param product
      */
-    public void saveCart(final Integer userId, final Cart cart) {
+    public void saveCart(final Long userId, final Cart cart) {
         var cartEntity = fetchCartById(userId);
         cartItemsEntityMapper.deleteCartItemsByCartId(cartEntity.getId());
 
@@ -63,7 +66,7 @@ public class CartRepository {
         cartItemsEntityMapper.bulkInsert(items);
     }
 
-    private CartsEntity fetchCartById(final Integer userId) {
+    private CartsEntity fetchCartById(final Long userId) {
         var cartEntity = cartsEntityMapper.selectByUserId(userId);
         if (cartEntity.isEmpty()) {
             throw new RuntimeException("カートが存在しません");
@@ -74,8 +77,8 @@ public class CartRepository {
     /**
      * カート内の商品をすべて削除する
      */
-    public void removeAll(final Integer userId) {
-        var cart = getCartByUserId(userId);
+    public void removeAll(final Long userId) {
+        var cart = findCartByUserId(userId);
         if (cart.getItemCount() == 0) {
             throw new RuntimeException("カートに商品が存在しません");
         }

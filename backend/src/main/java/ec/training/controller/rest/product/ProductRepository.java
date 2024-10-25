@@ -2,7 +2,6 @@ package ec.training.controller.rest.product;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import ec.training.mapper.ProductsEntityMapper;
@@ -13,15 +12,18 @@ import ec.training.mapper.ProductsEntityMapper;
 @Repository
 public class ProductRepository {
 
-    @Autowired
-    private ProductsEntityMapper productsEntityMapper;
+    private final ProductsEntityMapper productsEntityMapper;
+
+    ProductRepository(ProductsEntityMapper productsEntityMapper) {
+        this.productsEntityMapper = productsEntityMapper;
+    }
 
     /**
      * 
      * @param productId
      * @return 対象の商品
      */
-    public Product selectProductById(final Long productId) {
+    public Product findProductById(final Long productId) {
         var product = productsEntityMapper.selectByPrimaryKey(productId);
         if (product.isEmpty()) {
             throw new IllegalArgumentException("対象の商品は存在しません。");
@@ -34,9 +36,11 @@ public class ProductRepository {
      * 
      * @return すべての商品
      */
-    public List<Product> selectAllProduct() {
+    public List<Product> findAllProduct() {
         var products = productsEntityMapper.selectAll();
-
+        if (products.isEmpty()) {
+            throw new RuntimeException("商品がありません");
+        }
         return products.stream().map(Product::new).toList();
     }
 

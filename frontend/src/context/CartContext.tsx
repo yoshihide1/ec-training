@@ -13,8 +13,7 @@ export interface Product {
   image: string;
 }
 
-interface CartItem {
-  product: Product;
+interface CartItem extends Product {
   quantity: number;
 }
 

@@ -32,32 +32,32 @@ const Cart: React.FC = () => {
         <>
           {cart.items.map((item) => (
             <div
-              key={item.product.id}
+              key={item.id}
               className="flex items-center justify-between border-b py-4"
             >
               <div className="flex items-center">
                 <img
                   src={SampleImage}
-                  alt={item.product.name}
+                  alt={item.name}
                   className="w-16 h-16 object-cover rounded mr-4"
                 />
                 <div>
-                  <h3 className="font-semibold">{item.product.name}</h3>
-                  <p className="text-gray-600">{item.product.category}</p>
-                  <p className="text-gray-600">¥{item.product.price}</p>
+                  <h3 className="font-semibold">{item.name}</h3>
+                  <p className="text-gray-600">{item.category}</p>
+                  <p className="text-gray-600">¥{item.price}</p>
                 </div>
               </div>
               <div className="flex items-center">
                 <button
                   className="p-1 rounded-full hover:bg-gray-200"
-                  onClick={() => removeFromCart(item.product.id)}
+                  onClick={() => removeFromCart(item.id)}
                 >
                   <Minus className="h-4 w-4" />
                 </button>
                 <span className="mx-2">{item.quantity}</span>
                 <button
                   className="p-1 rounded-full hover:bg-gray-200"
-                  onClick={() => addToCart(item.product)}
+                  onClick={() => addToCart(item)}
                 >
                   <Plus className="h-4 w-4" />
                 </button>

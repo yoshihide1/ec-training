@@ -9,9 +9,8 @@ public record ProductDto(
         String description,
         BigDecimal price,
         Integer stockQuantity) {
-    public static ProductDto of(final Product product) {
-        return new ProductDto(
-                product.id(),
+    ProductDto(final Product product) {
+        this(product.id(),
                 product.category(),
                 product.name(),
                 product.description(),

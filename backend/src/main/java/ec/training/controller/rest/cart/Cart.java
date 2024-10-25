@@ -1,12 +1,13 @@
 package ec.training.controller.rest.cart;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import ec.training.controller.rest.product.Product;
 
+/**
+ * カートドメイン
+ */
 record Cart(Map<Long, CartItem> items) {
 
     /**
@@ -33,7 +34,7 @@ record Cart(Map<Long, CartItem> items) {
      * @param product
      * @return
      */
-    public Cart remove(final Long productId) {
+    Cart remove(final Long productId) {
         var updatedItems = new HashMap<>(this.items);
         if (updatedItems.containsKey(productId)) {
             var existingItem = updatedItems.get(productId);
@@ -47,11 +48,7 @@ record Cart(Map<Long, CartItem> items) {
         return new Cart(updatedItems);
     }
 
-    public List<CartItem> getItems() {
-        return new ArrayList<>(items.values());
-    }
-
-    public int getItemCount() {
+    int getItemCount() {
         return this.items.size();
     }
 

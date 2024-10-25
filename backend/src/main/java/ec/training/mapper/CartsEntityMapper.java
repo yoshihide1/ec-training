@@ -38,6 +38,5 @@ public interface CartsEntityMapper {
      * @param userId
      * @return ユーザーに紐づくカート
      */
-    Optional<CartsEntity> selectByUserId(Integer userId);
-
+    Optional<CartsEntity> selectByUserId(Long userId);
 }

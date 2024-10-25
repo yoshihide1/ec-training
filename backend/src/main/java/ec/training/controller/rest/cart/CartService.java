@@ -1,9 +1,9 @@
 package ec.training.controller.rest.cart;
 
-import java.util.HashMap;
+import java.util.Collections;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import ec.training.controller.rest.product.ProductRepository;
 
@@ -11,13 +11,26 @@ import ec.training.controller.rest.product.ProductRepository;
  * カートを操作するサービスクラス
  */
 @Service
-public class CartService {
+class CartService {
 
-    @Autowired
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
 
-    @Autowired
-    private CartRepository cartRepository;
+    private final CartRepository cartRepository;
+
+    CartService(CartRepository cartRepository, ProductRepository productRepository) {
+        this.cartRepository = cartRepository;
+        this.productRepository = productRepository;
+    }
+
+    /**
+     * 
+     * @param userId
+     * @return カートを取得
+     */
+    CartDto getCart(final Long userId) {
+        var cart = cartRepository.findCartByUserId(userId);
+        return new CartDto(cart);
+    }
 
     /**
      * 商品を追加する
@@ -26,13 +39,14 @@ public class CartService {
      * @param userId
      * @return 商品追加後のカート
      */
-    public Cart add(final Long productId, final Integer userId) {// TODO LoginAuthなどに変更する
-        var product = productRepository.selectProductById(productId);
+    @Transactional
+    CartDto add(final Long productId, final Long userId) {// TODO LoginAuthなどに変更する
+        var product = productRepository.findProductById(productId);
         // TODO: 仮で固定、SpringSecurity実装後に修正する
-        var cart = cartRepository.getCartByUserId(userId);
+        var cart = cartRepository.findCartByUserId(userId);
         var addedItemCart = cart.add(product);
         cartRepository.saveCart(userId, addedItemCart);
-        return addedItemCart;
+        return new CartDto(addedItemCart);
     }
 
     /**
@@ -42,14 +56,15 @@ public class CartService {
      * @param userId
      * @return 商品削除後のカート
      */
-    public Cart remove(final Long productId, final Integer userId) {
-        var cart = cartRepository.getCartByUserId(userId);
+    @Transactional
+    CartDto remove(final Long productId, final Long userId) {
+        var cart = cartRepository.findCartByUserId(userId);
         var deletedItemCart = cart.remove(productId);
         if (deletedItemCart.items().isEmpty()) {
             return clearCart(userId);
         }
         cartRepository.saveCart(userId, deletedItemCart);
-        return deletedItemCart;
+        return new CartDto(deletedItemCart);
     }
 
     /**
@@ -58,8 +73,9 @@ public class CartService {
      * @param userId
      * @return 空のカート
      */
-    public Cart clearCart(final Integer userId) {
+    @Transactional
+    CartDto clearCart(final Long userId) {
         cartRepository.removeAll(userId);
-        return new Cart(new HashMap<>());
+        return new CartDto(Collections.emptyList(), 0);
     }
 }
