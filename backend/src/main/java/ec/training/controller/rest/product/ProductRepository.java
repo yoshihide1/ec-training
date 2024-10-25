@@ -21,7 +21,7 @@ public class ProductRepository {
      * @param productId
      * @return 対象の商品
      */
-    public Product getProductById(final Long productId) {
+    public Product selectProductById(final Long productId) {
         var product = productsEntityMapper.selectByPrimaryKey(productId);
         if (product.isEmpty()) {
             throw new IllegalArgumentException("対象の商品は存在しません。");

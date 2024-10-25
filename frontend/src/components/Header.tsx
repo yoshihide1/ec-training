@@ -1,20 +1,21 @@
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { ShoppingCart, Search, Menu } from 'lucide-react';
-import { useCart } from '../context/CartContext';
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { ShoppingCart, Search, Menu } from "lucide-react";
+import { useCart } from "../context/CartContext";
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
-  const { cartItems } = useCart();
-
-  const cartItemCount = cartItems.reduce((total, item) => total + item.quantity, 0);
+  const { cart: cart } = useCart();
+  console.log(cart);
 
   return (
     <header className="bg-white shadow-md">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <div className="flex items-center">
           <Menu className="h-6 w-6 mr-4 cursor-pointer" />
-          <Link to="/" className="text-xl font-bold">ECショップ</Link>
+          <Link to="/" className="text-xl font-bold">
+            ECショップ
+          </Link>
         </div>
         <div className="flex items-center">
           <div className="relative mr-4">
@@ -28,11 +29,11 @@ const Header: React.FC = () => {
           <div className="relative">
             <ShoppingCart
               className="h-6 w-6 cursor-pointer"
-              onClick={() => navigate('/cart')}
+              onClick={() => navigate("/cart")}
             />
-            {cartItemCount > 0 && (
+            {cart.itemCount > 0 && (
               <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
-                {cartItemCount}
+                {cart.itemCount}
               </span>
             )}
           </div>

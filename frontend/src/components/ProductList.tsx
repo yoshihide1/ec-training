@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
 import { getRequest } from "./common/ApiUtils";
-import { Product } from "../context/CartContext";
+import { Product, useCart } from "../context/CartContext";
 
 const ProductList = () => {
   const [products, setProducts] = useState<Product[]>([]);
+  const { initialize } = useCart();
   useEffect(() => {
+    initialize();
     getRequest("/api/product/list", setProducts);
   }, []);
   return (

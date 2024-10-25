@@ -11,8 +11,8 @@ export const getRequest = <T,>(url: string, callback: (res: T) => void) => {
 
 export const postRequest = <T, T2>(
   url: string,
-  params: T,
-  callback: (data: T2) => void
+  callback: (data: T2) => void,
+  params?: T
 ) => {
   axios
     .post(url, params)
@@ -25,12 +25,12 @@ export const postRequest = <T, T2>(
     });
 };
 
-export const deleteRequest = (url: string, callback: () => void) => {
+export const deleteRequest = <T,>(url: string, callback: (res: T) => void) => {
   axios
     .delete(url)
     .then((res: AxiosResponse) => {
       console.log("success:", res);
-      callback();
+      callback(res.data);
     })
     .catch((error) => {
       console.error("Error: ", error);

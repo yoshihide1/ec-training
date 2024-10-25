@@ -1,23 +1,35 @@
 import React, { createContext, useContext, useState, ReactNode } from "react";
-import { postRequest } from "../components/common/ApiUtils";
+import {
+  deleteRequest,
+  getRequest,
+  postRequest,
+} from "../components/common/ApiUtils";
 
 export interface Product {
   id: number;
+  category: string;
   name: string;
   price: number;
   image: string;
 }
 
-interface CartItem extends Product {
+interface CartItem {
+  product: Product;
   quantity: number;
 }
 
+interface Cart {
+  items: CartItem[];
+  itemCount: number;
+}
+
 interface CartContextType {
-  cartItems: CartItem[];
+  cart: Cart;
   addToCart: (product: Product) => void;
   removeFromCart: (productId: number) => void;
   clearCart: () => void;
   getCartTotal: () => number;
+  initialize: () => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -33,50 +45,60 @@ export const useCart = () => {
 export const CartProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [cartItems, setCartItems] = useState<Cart | undefined>(undefined);
+
+  const initialize = () => {
+    getRequest("/api/cart/1", setCartItems); //TODO 仮で固定
+  };
 
   const addToCart = (product: Product) => {
-    postRequest("/api/cart/add", { productId: product.id }, setCartItems);
-    // setCartItems(prevItems => {
-    //   const existingItem = prevItems.find(item => item.id === product.id);
-    //   if (existingItem) {
-    //     return prevItems.map(item =>
-    //       item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
-    //     );
-    //   }
-    //   return [...prevItems, { ...product, quantity: 1 }];
-    // });
+    console.log(product);
+    postRequest("/api/cart/add", setCartItems, { productId: product.id });
   };
 
   const removeFromCart = (productId: number) => {
-    setCartItems((prevItems) =>
-      prevItems.reduce((acc, item) => {
-        if (item.id === productId) {
-          if (item.quantity > 1) {
-            acc.push({ ...item, quantity: item.quantity - 1 });
-          }
-        } else {
-          acc.push(item);
-        }
-        return acc;
-      }, [] as CartItem[])
-    );
+    console.log(productId);
+    postRequest(`/api/cart/remove/${productId}`, setCartItems);
+    // setCartItems((prevItems) =>
+    //   prevItems.reduce((acc, item) => {
+    //     if (item.productId === productId) {
+    //       if (item.quantity > 1) {
+    //         acc.push({ ...item, quantity: item.quantity - 1 });
+    //       }
+    //     } else {
+    //       acc.push(item);
+    //     }
+    //     return acc;
+    //   }, [] as CartItem[])
+    // );
   };
 
+  /**
+   * カート内の商品をすべて削除する
+   */
   const clearCart = () => {
-    setCartItems([]);
+    deleteRequest("/api/cart/remove/all", setCartItems);
   };
 
+  //TODO 後で実装
   const getCartTotal = () => {
-    return cartItems.reduce(
-      (total, item) => total + item.price * item.quantity,
-      0
-    );
+    return 0;
+    // return cartItems.reduce(
+    //   (total, item) => total + item.price * item.quantity,
+    //   0
+    // );
   };
 
   return (
     <CartContext.Provider
-      value={{ cartItems, addToCart, removeFromCart, clearCart, getCartTotal }}
+      value={{
+        cart: cartItems || { items: [], itemCount: 0 }, // undefined時のデフォルトを設定,
+        addToCart,
+        removeFromCart,
+        clearCart,
+        getCartTotal,
+        initialize,
+      }}
     >
       {children}
     </CartContext.Provider>

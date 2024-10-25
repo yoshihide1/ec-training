@@ -20,7 +20,7 @@ public class ProductDtoService {
      * @return 単一の商品DTO
      */
     public ProductDto toDto(final Long productId) {
-        var product = productRepository.getProductById(productId);
+        var product = productRepository.selectProductById(productId);
         return ProductDto.of(product);
     }
 

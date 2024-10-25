@@ -33,7 +33,7 @@ public interface CartItemsEntityMapper {
 
         int updateByPrimaryKey(CartItemsEntity record);
 
-        List<CartItemsEntity> selectCartItemsByCartId(@Param("cartId") Long cartId);
+        List<CartItemsEntity> selectByCartId(@Param("cartId") Long cartId);
 
         /**
          * 対象のユーザーのカートItemを削除する
